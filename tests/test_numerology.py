@@ -26,8 +26,8 @@ class LifePathTests(unittest.TestCase):
         self.assertEqual(life_path_number(date(1990, 5, 15)), 3)
 
     def test_master_number_11(self):
-        # 1980-02-27 → 2+7+0+2+1+9+8+0 = 29 → 2+9 = 11 (мастер-число)
-        self.assertEqual(life_path_number(date(1980, 2, 27)), 11)
+        # 1950-04-19 → 1+9+0+4+1+9+5+0 = 29 → 2+9 = 11 (мастер-число)
+        self.assertEqual(life_path_number(date(1950, 4, 19)), 11)
         self.assertTrue(is_master_number(11))
 
     def test_master_number_22(self):
@@ -46,13 +46,13 @@ class LifePathTests(unittest.TestCase):
 
 
 class PowerNumbersTests(unittest.TestCase):
-    def test_birthday_27_feb_1980(self):
-        # День рождения: 27, число пути: 11
-        # Составляющие 27: 2, 7
+    def test_birthday_19_apr_1950(self):
+        # День рождения: 19, число пути: 11
+        # Составляющие 19: 1, 9
         # Составляющие 11: мастер-число, не сводится
-        # Месяц 02: 2
-        result = power_numbers(date(1980, 2, 27), 11)
-        self.assertEqual(result, [2, 7, 11, 27])
+        # Месяц 04: 4
+        result = power_numbers(date(1950, 4, 19), 11)
+        self.assertEqual(result, [1, 4, 9, 11, 19])
 
     def test_extra_numbers(self):
         result = power_numbers(date(1990, 5, 15), 3, extra=[20])

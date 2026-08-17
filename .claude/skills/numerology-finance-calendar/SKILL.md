@@ -33,13 +33,13 @@ description: Генератор персонального финансовог�
 
 ```bash
 # Календарь на конкретный месяц
-python scripts/generate_calendar.py --birthdate 1980-02-27 --month 2026-08
+python scripts/generate_calendar.py --birthdate 1990-05-15 --month 2026-08
 
 # Статус на сегодня
-python scripts/generate_calendar.py --birthdate 1980-02-27 --today
+python scripts/generate_calendar.py --birthdate 1990-05-15 --today
 
 # С пользовательскими правилами
-python scripts/generate_calendar.py --birthdate 1980-02-27 --rules ./my-rules.json --today
+python scripts/generate_calendar.py --birthdate 1990-05-15 --rules ./my-rules.json --today
 ```
 
 ## Как использовать как модуль Python
@@ -48,9 +48,9 @@ python scripts/generate_calendar.py --birthdate 1980-02-27 --rules ./my-rules.js
 from datetime import date
 from numerology import life_path_number, power_numbers, load_rules, day_for_date
 
-birth = date(1980, 2, 27)
-lp = life_path_number(birth)                       # 11
-pn = power_numbers(birth, lp)                     # [2, 7, 11, 27]
+birth = date(1990, 5, 15)
+lp = life_path_number(birth)                       # 3
+pn = power_numbers(birth, lp)                     # [1, 3, 5, 15]
 rules = load_rules("rules/default-rules.json")
 today = day_for_date(date.today(), rules)
 print(today.good, today.bad, today.neutral)
@@ -71,7 +71,7 @@ numerology-finance-calendar/
 ├── tests/
 │   └── test_numerology.py      # юнит-тесты
 ├── examples/
-│   └── example-1980-02-27.json # пример результата
+│   └── example-1990-05-15-2026-08.json # пример результата
 ├── README.md
 └── LICENSE
 ```
@@ -82,7 +82,7 @@ numerology-finance-calendar/
 python -m unittest tests.test_numerology -v
 ```
 
-15 тестов покрывают:
+17 тестов покрывают:
 - распознавание мастер-чисел (11, 22, 33),
 - расчёт чисел силы для известных дат,
 - классификацию дней (good / bad / neutral),

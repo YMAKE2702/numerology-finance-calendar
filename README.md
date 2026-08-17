@@ -4,19 +4,23 @@
 
 ![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Tests](https://img.shields.io/badge/tests-15%2F15-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-17%2F17-brightgreen.svg)
 
 ## Что это
 
-Проект рассчитывает **числа силы** по дате рождения и определяет, какие дни месяца благоприятны для финансовых операций (накопления, оплаты, крупные покупки, лотерея), а какие — табу.
+Проект рассчитывает **число жизненного пути** и **числа силы** по дате рождения и определяет, какие дни месяца благоприятны для финансовых операций (накопления, оплаты, крупные покупки, лотерея), а какие — табу.
+
+> **Разница понятий:**
+> - **Число жизненного пути** — ОДНА цифра (1–9, 11, 22, 33). Считается сложением всех цифр даты.
+> - **Числа силы** — НАБОР цифр, благоприятных для конкретного человека. Включают день рождения, число пути, составляющие цифры.
 
 ```bash
-$ python scripts/generate_calendar.py --birthdate 1980-02-27 --today
+$ python scripts/generate_calendar.py --birthdate 1990-05-15 --today
 
 === 2026-08-17 (понедельник) ===
-Дата рождения: 1980-02-27
-Число жизненного пути: 11
-Числа силы: [2, 7, 11, 27]
+Дата рождения: 1990-05-15
+Число жизненного пути: 3
+Числа силы: [1, 3, 5, 15]
 
 ❌ ДЕНЬ-ТАБУ
 
@@ -38,9 +42,9 @@ numerology-finance-calendar/
 ├── scripts/
 │   └── generate_calendar.py        # CLI
 ├── tests/
-│   └── test_numerology.py          # 15 юнит-тестов
+│   └── test_numerology.py          # 17 юнит-тестов
 ├── examples/
-│   └── example-1980-02-27-2026-08.json
+│   └── example-1990-05-15-2026-08.json
 ├── .claude/
 │   └── skills/
 │       └── numerology-finance-calendar/
@@ -61,10 +65,10 @@ cd numerology-finance-calendar
 pip install -r requirements.txt
 
 # Посмотреть статус на сегодня
-python scripts/generate_calendar.py --birthdate 1980-02-27 --today
+python scripts/generate_calendar.py --birthdate 1990-05-15 --today
 
 # Посмотреть календарь на месяц
-python scripts/generate_calendar.py --birthdate 1980-02-27 --month 2026-08
+python scripts/generate_calendar.py --birthdate 1990-05-15 --month 2026-08
 
 # Запустить тесты
 python -m unittest tests.test_numerology -v
@@ -81,7 +85,7 @@ python -m unittest tests.test_numerology -v
 3. Если получилось двузначное число — складываем его цифры.
 4. **Мастер-числа 11, 22, 33 не сводятся** — это их суть.
 
-**Пример:** 1980-02-27 → 2+7+0+2+1+9+8+0 = 29 → 2+9 = **11** (мастер-число).
+**Пример:** 1990-05-15 → 1+5+0+5+1+9+9+0 = 30 → 3+0 = **3**.
 
 Источник: [Нумерология — Wikipedia](https://ru.wikipedia.org/wiki/Нумерология).
 
@@ -133,9 +137,9 @@ python -m unittest tests.test_numerology -v
 from datetime import date
 from numerology import life_path_number, power_numbers, load_rules, day_for_date
 
-birth = date(1980, 2, 27)
+birth = date(1950, 4, 19)
 lp = life_path_number(birth)                       # 11
-pn = power_numbers(birth, lp)                     # [2, 7, 11, 27]
+pn = power_numbers(birth, lp)                     # [1, 4, 9, 11, 19]
 rules = load_rules("rules/default-rules.json")
 today = day_for_date(date.today(), rules)
 

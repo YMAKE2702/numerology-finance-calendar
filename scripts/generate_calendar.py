@@ -1,18 +1,18 @@
 """CLI: сгенерировать финансовый календарь на месяц по дате рождения.
 
 Использование:
-    python scripts/generate_calendar.py --birthdate 1980-02-27 --month 2026-08
-    python scripts/generate_calendar.py --birthdate 1980-02-27 --today
+    python scripts/generate_calendar.py --birthdate 1990-05-15 --month 2026-08
+    python scripts/generate_calendar.py --birthdate 1990-05-15 --today
 
 Пример вывода:
     === Финансовый календарь на август 2026 ===
-    Дата рождения: 1980-02-27
-    Число жизненного пути: 11
-    Числа силы: [2, 7, 11, 27]
+    Дата рождения: 1990-05-15
+    Число жизненного пути: 3
+    Числа силы: [1, 3, 5, 15]
 
-    Дни силы: 2, 7, 11, 20, 22, 27, 33
-    Дни-табу: 5, 8, 13, 14, 17, 23, 26, 29
-    Нейтральные: 1, 3, 4, 6, 9, 10, 12, 15, 16, 18, 19, 21, 24, 25, 28, 30, 31
+    Дни силы: 1, 3, 5, 7, 11, 15, 20, 22, 27, 33
+    Дни-табу: 8, 13, 14, 17, 23, 26, 29
+    Нейтральные: 2, 4, 6, 9, 10, 12, 16, 18, 19, 21, 24, 25, 28, 30, 31
 
     По каждому дню силы:
       7 (пятница): ✅ Можно — Отложить деньги в накопления, Оплата подписок, Купить лотерейный билет, Крупная покупка
@@ -27,6 +27,13 @@ from pathlib import Path
 
 PROJECT_DIR = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_DIR))
+
+# Корректный вывод кириллицы и эмодзи в Windows-консоли (cp1251)
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 from numerology import life_path_number, power_numbers, load_rules, generate_month, day_for_date, power_days, forbidden_days, neutral_days  # noqa: E402
 
